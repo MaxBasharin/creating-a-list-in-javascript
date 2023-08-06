@@ -66,7 +66,7 @@ $table.append($tableBody);
 $app.append($table);
 
 function createUserTr(oneUser) {
-    const $userTr = document.createElement("tr"),
+  const $userTr = document.createElement("tr"),
     $userFio = document.createElement("th"),
     $userAge = document.createElement("th"),
     $userBirthday = document.createElement("th"),
@@ -82,42 +82,67 @@ function createUserTr(oneUser) {
   $userTr.append($userBirthday);
   $userTr.append($userHobby);
 
-  return $userTr
+  return $userTr;
 }
 
 // Рендер
 function render(arrData) {
-    $tableBody.innerHTML = '';
-// Подготовка
-const copyListData = [...arrData];
-for (const oneUser of copyListData) {
-  oneUser.fio = oneUser.name + " " + oneUser.surname + " " + oneUser.lastname;
+  $tableBody.innerHTML = "";
+  // Подготовка
+  const copyListData = [...arrData];
+  for (const oneUser of copyListData) {
+    oneUser.fio = oneUser.name + " " + oneUser.surname + " " + oneUser.lastname;
 
-  oneUser.Birthday = 2022 - oneUser.age;
+    oneUser.Birthday = 2022 - oneUser.age;
+  }
+
+  console.log(copyListData);
+  // Отрисовка
+
+  for (const oneUser of copyListData) {
+    const $newTr = createUserTr(oneUser);
+
+    $tableBody.append($newTr);
+  }
 }
 
-console.log(copyListData);
-// Отрисовка
-
-for (const oneUser of copyListData) {
- const $newTr = createUserTr(oneUser)
-
-  $tableBody.append($newTr);
-}
-}
-
-render(listData)
+render(listData);
 
 // Добавление
 $addForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
+  // Валидация
+  if ($nameInp.value.trim() == "") {
+    var newBlock = "<span style='color:tomato'>Введите Имя</span>";
+    $nameInp.insertAdjacentHTML("beforebegin", newBlock);
+    return;
+  } 
+
+  if ($surenameInp.value.trim() == "") {
+    var newBlock = "<span style='color:tomato'>Введите фамилию</span>";
+    $surenameInp.insertAdjacentHTML("beforebegin", newBlock);
+    return;
+  }
+
+  if ($lastnameInp.value.trim() == "") {
+    var newBlock = "<span style='color:tomato'>Введите отчество</span>";
+    $lastnameInp.insertAdjacentHTML("beforebegin", newBlock);
+    return;
+  }
+  if ($ageInp.value.trim() == "") {
+    var newBlock = "<span style='color:tomato'>Введите возраст</span>";
+    $ageInp.insertAdjacentHTML("beforebegin", newBlock);
+    return;
+  }
+
+
   listData.push({
-    name: $nameInp.value,
-    surname: $surenameInp.value,
-    lastname: $lastnameInp.value,
-    age: parseInt($ageInp.value),
-    hobby: $hobbyInp.value,
+    name: $nameInp.value.trim(),
+    surname: $surenameInp.value.trim(),
+    lastname: $lastnameInp.value.trim(),
+    age: parseInt($ageInp.value.trim()),
+    hobby: $hobbyInp.value.trim(),
   });
-  render(listData)
+  render(listData);
 });
