@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Список в JavaScript</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Список</h1>
+
+      <form action="#" id="add-form" class="mb-3">
+          <input class="form-control mb-3" id="add-form__name-inp" type="text" placeholder="Имя">
+          <input class="form-control mb-3" id="add-form__surename-inp" type="text" placeholder="Отчество">
+          <input class="form-control mb-3" id="add-form__lastname-inp" type="text" placeholder="Фамилия">
+          <input class="form-control mb-3" id="add-form__age-inp" type="text" placeholder="Возраст">
+          <input class="form-control mb-3" id="add-form__hobby-inp" type="text" placeholder="Хобби">
+      
+        <button type="submit" class="btn btn-primary">
+          Добавить пользователя
+        </button>
+      </form>
+      <div id="app"></div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
