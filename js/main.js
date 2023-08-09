@@ -30,6 +30,8 @@ let listData = [
   },
 ];
 
+let sortColumnFlag = 'fio'
+
 // Создание элементов
 const $app = document.getElementById("app"),
   $addForm = document.getElementById("add-form"),
@@ -38,6 +40,8 @@ const $app = document.getElementById("app"),
   $lastnameInp = document.getElementById("add-form__lastname-inp"),
   $ageInp = document.getElementById("add-form__age-inp"),
   $hobbyInp = document.getElementById("add-form__hobby-inp"),
+  $sortFioBtn = document.getElementById("sort__fio"),
+  $sortAgeBtn = document.getElementById("sort__age"),
   $table = document.createElement("table"),
   $tableHead = document.createElement("thead"),
   $tableBody = document.createElement("tbody");
@@ -89,16 +93,21 @@ function createUserTr(oneUser) {
 function render(arrData) {
   $tableBody.innerHTML = "";
   // Подготовка
-  const copyListData = [...arrData];
+ let copyListData = [...arrData];
   for (const oneUser of copyListData) {
     oneUser.fio = oneUser.name + " " + oneUser.surname + " " + oneUser.lastname;
-
     oneUser.Birthday = 2022 - oneUser.age;
   }
 
   console.log(copyListData);
-  // Отрисовка
 
+// Сортировка
+console.log(sortColumnFlag)
+copyListData = copyListData.sort(function(a, b) {
+  if (a[sortColumnFlag] < b[sortColumnFlag]) return -1
+})
+
+  // Отрисовка
   for (const oneUser of copyListData) {
     const $newTr = createUserTr(oneUser);
 
@@ -146,3 +155,13 @@ $addForm.addEventListener("submit", function (event) {
   });
   render(listData);
 });
+
+// Клики сортировки
+$sortFioBtn.addEventListener('click', function() {
+  sortColumnFlag='fio'
+  render(listData)
+})
+$sortAgeBtn.addEventListener('click', function() {
+  sortColumnFlag='age'
+  render(listData)
+})
